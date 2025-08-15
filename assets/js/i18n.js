@@ -1,5 +1,3 @@
-let translations = {};
-
 const elementsMap = {
     'tagline': 'tagline',
     'hero-title': 'heroTitle',
@@ -14,9 +12,33 @@ const elementsMap = {
     'b2-sub': 'b2Sub',
     'b3-title': 'b3Title',
     'b3-sub': 'b3Sub',
-    'b4-title': 'b4Title',
-    'b4-sub': 'b4Sub',
+    'b3-desc': 'b3Desc',
+    'features-title': 'featuresTitle',
+    'features-sub': 'featuresSub',
+    'company-title': 'companyTitle',
+    'company-desc': 'companyDesc',
+    'company-li-1': 'companyLi1',
+    'company-li-2': 'companyLi2',
+    'company-li-3': 'companyLi3',
+    'trust-title': 'trustTitle',
+    'trust-desc': 'trustDesc',
+    'location': 'location',
+    'contact-title': 'contactTitle',
+    'contact-sub': 'contactSub',
+    'support-hours': 'supportHours',
+    'send-text': 'sendText',
+    'demo-btn': 'demoBtn',
+    'copyright': 'copyright',
+    'privacy-link': 'privacyLink',
+    'terms-link': 'termsLink',
     'cta-buy-text': 'buyText'
+};
+
+const placeholdersMap = {
+    'name': 'formName',
+    'email': 'formEmail',
+    'company': 'formCompany',
+    'message': 'formMessage'
 };
 
 async function fetchTranslations() {
@@ -42,6 +64,13 @@ function applyTranslations(lang) {
         const el = document.getElementById(id);
         if (el) {
             el.textContent = t[elementsMap[id]];
+        }
+    }
+
+    for (const id in placeholdersMap) {
+        const el = document.getElementById(id);
+        if (el) {
+            el.placeholder = t[placeholdersMap[id]];
         }
     }
 }
