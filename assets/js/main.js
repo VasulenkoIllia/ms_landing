@@ -17,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const codeElement = document.getElementById('code-example');
     if (codeElement) {
-        const codeSnippet = `// Підключення до реєстратора
-Driver.Connect(Порт: "COM3", Швидкість: 9600);
+        const codeSnippet = `// Connection
+Driver.Connect(Port: "COM3");
 
-// Друк чека
+
 Driver.OpenReceipt();
-Driver.AddItem(Назва: "Товар 1", Ціна: 150.00, К-ть: 2);
-Driver.AddPayment(Тип: "card", Сума: 300.00);
-Driver.CloseReceipt(); // Готово!`;
+Driver.AddItem(Name, Price);
+Driver.AddPayment(Card);
+Driver.CloseReceipt();`;
         startTypewriter(codeElement, codeSnippet);
     }
 

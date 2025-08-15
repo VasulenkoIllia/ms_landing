@@ -1,18 +1,25 @@
 const textForBlocks = {
     block1C: [
-        { id: 'line-1c-1', text: '> event Sale.Create()' }, { id: 'line-1c-2', text: '> Керування товарами' },
-        { id: 'line-1c-3', text: '> Формування чека' }, { id: 'line-1c-4', text: '[Відправка в драйвер...]' },
+        { id: 'line-1c-1', text: 'Sale.Create()' },
+        { id: 'line-1c-2', text: 'ManageItems()' },
+        { id: 'line-1c-3', text: 'MakeReceipt()' },
+        { id: 'line-1c-4', text: 'SendToDriver()' },
     ],
     blockDriver: [
-        { id: 'line-driver-1', text: '// Driver Postnet' }, { id: 'line-driver-2', text: 'Простий та гнучкий API' },
-        { id: 'line-driver-3', text: 'Обробка команд 1С' }, { id: 'line-driver-4', text: 'Логування та звіти' },
-        { id: 'line-driver-5', text: '[Фіскалізація...]' },
+        { id: 'line-driver-1', text: '// Driver: Posnet' },
+        { id: 'line-driver-2', text: 'API()' },
+        { id: 'line-driver-3', text: 'Handle1C()' },
+        { id: 'line-driver-4', text: 'LogReports()' },
+        { id: 'line-driver-5', text: 'Fiscalize()' },
     ],
     blockPosnet: [
-        { id: 'line-posnet-1', text: 'status: OK' }, { id: 'line-posnet-2', text: 'Друк на термострічці' },
-        { id: 'line-posnet-3', text: 'Формування Z-звітів' }, { id: 'line-posnet-4', text: '>> Чек надруковано' },
+        { id: 'line-posnet-1', text: 'status=OK' },
+        { id: 'line-posnet-2', text: 'Print()' },
+        { id: 'line-posnet-3', text: 'MakeZReport()' },
+        { id: 'line-posnet-4', text: 'ReceiptPrinted()' },
     ]
 };
+
 
 function typeWriterSVG(lines, charSpeed = 30) {
     return new Promise(resolve => {

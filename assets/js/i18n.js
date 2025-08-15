@@ -1,3 +1,7 @@
+// Оголошуємо змінну на рівні модуля, щоб вона була доступна для всіх функцій
+let translations = {};
+
+// Карта відповідності ID елемента -> ключ у JSON
 const elementsMap = {
     'tagline': 'tagline',
     'hero-title': 'heroTitle',
@@ -34,6 +38,7 @@ const elementsMap = {
     'cta-buy-text': 'buyText'
 };
 
+// Окрема карта для плейсхолдерів у формах
 const placeholdersMap = {
     'name': 'formName',
     'email': 'formEmail',
@@ -41,25 +46,30 @@ const placeholdersMap = {
     'message': 'formMessage'
 };
 
+// Асинхронна функція для завантаження JSON файлу
 async function fetchTranslations() {
     try {
         const response = await fetch('./assets/js/translations.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        // Записуємо результат у нашу глобальну змінну
         translations = await response.json();
     } catch (error) {
         console.error("Could not load translations:", error);
     }
 }
 
+// Функція, що застосовує переклади до сторінки
 function applyTranslations(lang) {
     const t = translations[lang] || translations.ua;
     if (!t) return;
 
+    // Встановлюємо атрибути для всієї сторінки
     document.documentElement.lang = lang;
     document.title = t.title;
 
+    // Застосовуємо переклади до звичайних елементів
     for (const id in elementsMap) {
         const el = document.getElementById(id);
         if (el) {
@@ -67,6 +77,7 @@ function applyTranslations(lang) {
         }
     }
 
+    // Окремо застосовуємо переклади до плейсхолдерів
     for (const id in placeholdersMap) {
         const el = document.getElementById(id);
         if (el) {
@@ -75,18 +86,22 @@ function applyTranslations(lang) {
     }
 }
 
+// Головна функція ініціалізації
 export async function initLangSwitcher() {
+    // Спочатку завантажуємо переклади
     await fetchTranslations();
 
     const langSwitch = document.getElementById('lang-switch');
     if (!langSwitch) return;
 
+    // Додаємо слухач на зміну мови
     langSwitch.addEventListener('change', (e) => {
         const lang = e.target.value;
         localStorage.setItem('lang', lang);
         applyTranslations(lang);
     });
 
+    // Застосовуємо збережену або дефолтну мову при завантаженні
     const savedLang = localStorage.getItem('lang') || 'ua';
     langSwitch.value = savedLang;
     applyTranslations(savedLang);
