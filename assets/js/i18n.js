@@ -17,7 +17,6 @@ const elementsMap = {
     'b4-title': 'b4Title',
     'b4-sub': 'b4Sub',
     'cta-buy-text': 'buyText'
-    // Додайте сюди інші ID елементів
 };
 
 async function fetchTranslations() {

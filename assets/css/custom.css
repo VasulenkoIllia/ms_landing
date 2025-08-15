@@ -1,7 +1,7 @@
 /* === 1. BLUEPRINT GRID BACKGROUND === */
 body::before {
     content: ''; position: fixed; inset: 0; z-index: -2; pointer-events: none;
-    background-image: linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(56, 189, 248, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(56, 189, 248, 0.15) 1px, transparent 1px);
     background-size: 2rem 2rem; animation: grid-pan 60s linear infinite;
 }
 .dark body::before {
@@ -11,7 +11,7 @@ body::before {
 
 /* === 2. ANIMATED GRADIENT === */
 .bg-animated-gradient {
-    position: absolute; inset: 0; z-index: -1;
+    position: absolute; inset: 0; z-index: -3;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2, #f5f7fa, #e0eafc);
     background-size: 400% 400%; animation: gradient-flow 15s ease infinite;
 }
@@ -46,17 +46,9 @@ body::before {
 /* Клас, що запускає анімацію стрілки */
 .diagram-arrow.is-drawing {
     opacity: 1;
-    /* Запускаємо анімацію "біжучих мурах" */
     animation: marching-ants 20s linear infinite;
 }
 
-/*
-  =================================================
-  == ОСЬ ТУТ НОВА АНІМАЦІЯ ==
-  Анімуємо stroke-dashoffset від великого значення до 0,
-  щоб створити ефект безперервного руху.
-  =================================================
-*/
 @keyframes marching-ants {
     from { stroke-dashoffset: 1000; }
     to { stroke-dashoffset: 0; }

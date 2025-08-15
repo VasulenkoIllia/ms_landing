@@ -1,4 +1,3 @@
-// Дані для анімації тексту в блоках
 const textForBlocks = {
     block1C: [
         { id: 'line-1c-1', text: '> event Sale.Create()' }, { id: 'line-1c-2', text: '> Керування товарами' },
@@ -15,7 +14,6 @@ const textForBlocks = {
     ]
 };
 
-// Функція "друкарської машинки", яка повертає Promise після завершення
 function typeWriterSVG(lines, charSpeed = 30) {
     return new Promise(resolve => {
         let lineIndex = 0; let charIndex = 0;
@@ -37,16 +35,13 @@ function typeWriterSVG(lines, charSpeed = 30) {
     });
 }
 
-// Функція анімації стрілки, яка повертає Promise
 function drawArrow(arrowElement) {
     return new Promise(resolve => {
         arrowElement.addEventListener('transitionend', resolve, { once: true });
-        // Ось де ми додаємо клас, щоб запустити анімацію з CSS
         arrowElement.classList.add('is-drawing');
     });
 }
 
-// Головна функція анімації
 export function initDiagramAnimation() {
     const diagram = document.getElementById('how-it-works-diagram');
     if (!diagram) return;
@@ -61,7 +56,6 @@ export function initDiagramAnimation() {
 
     let isAnimating = false;
 
-    // Функція для підготовки елементів до анімації
     const setupElements = () => {
         allArrows.forEach(arrow => {
             const length = arrow.getTotalLength();
@@ -73,7 +67,7 @@ export function initDiagramAnimation() {
         isAnimating = false;
         [box1, box2, box3].forEach(box => box.classList.remove('is-visible'));
         allArrows.forEach(arrow => {
-            arrow.classList.remove('is-drawing'); // Прибираємо клас при скиданні
+            arrow.classList.remove('is-drawing');
             const length = arrow.getTotalLength();
             if (length > 0) {
                 arrow.style.strokeDashoffset = length;
@@ -82,26 +76,20 @@ export function initDiagramAnimation() {
         allTspans.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = ''; });
     };
 
-    // Використовуємо async/await для чистої послідовності
     const startAnimation = async () => {
         if (isAnimating) return;
         isAnimating = true;
 
-        // Крок 1: Показати перший блок і дочекатися завершення друку
         box1.classList.add('is-visible');
         await typeWriterSVG(textForBlocks.block1C);
 
-        // Крок 2: Намалювати першу стрілку і дочекатися її завершення
         await drawArrow(arrow1);
 
-        // Крок 3: Показати другий блок і дочекатися завершення друку
         box2.classList.add('is-visible');
         await typeWriterSVG(textForBlocks.blockDriver);
 
-        // Крок 4: Намалювати другу стрілку і дочекатися її завершення
         await drawArrow(arrow2);
 
-        // Крок 5: Показати третій блок і почати друк
         box3.classList.add('is-visible');
         await typeWriterSVG(textForBlocks.blockPosnet);
     };

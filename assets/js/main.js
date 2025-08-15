@@ -1,27 +1,20 @@
 import { initTheme } from './theme.js';
 import { initLangSwitcher } from './i18n.js';
 import { startTypewriter } from './typewriter.js';
-import { initDiagramAnimation } from './diagram.js'; // <-- ІМПОРТУЄМО НОВИЙ МОДУЛЬ
-
-// import { initForm } from './form.js';
+import { initDiagramAnimation } from './diagram.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize libraries
     AOS?.init({ once: true, duration: 700 });
 
-    // Initialize our modules
     initTheme();
     initLangSwitcher();
-    initDiagramAnimation(); // <-- ЗАПУСКАЄМО АНІМАЦІЮ ДІАГРАМИ
-    // initForm();
+    initDiagramAnimation();
 
-    // Set current year in footer
     const footerYear = document.getElementById('footer-year');
     if (footerYear) {
         footerYear.textContent = new Date().getFullYear();
     }
 
-    // Start the typewriter animation in the hero block
     const codeElement = document.getElementById('code-example');
     if (codeElement) {
         const codeSnippet = `// Підключення до реєстратора
@@ -35,6 +28,5 @@ Driver.CloseReceipt(); // Готово!`;
         startTypewriter(codeElement, codeSnippet);
     }
 
-    // Lucide icons викликаємо в самому кінці
     lucide.createIcons();
 });
